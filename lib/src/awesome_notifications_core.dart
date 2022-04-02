@@ -1,10 +1,6 @@
 import 'dart:async';
-import 'dart:typed_data';
 import 'dart:convert';
-
-import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'dart:typed_data';
 
 // In order to *not* need this ignore, consider extracting the "web" version
 // of your plugin as a separate package, instead of inlining it in the same
@@ -18,13 +14,16 @@ import 'package:awesome_notifications/src/enumerators/media_source.dart';
 import 'package:awesome_notifications/src/models/notification_button.dart';
 import 'package:awesome_notifications/src/models/notification_channel.dart';
 import 'package:awesome_notifications/src/models/notification_content.dart';
-import 'package:awesome_notifications/src/models/notification_schedule.dart';
 import 'package:awesome_notifications/src/models/notification_model.dart';
+import 'package:awesome_notifications/src/models/notification_schedule.dart';
 import 'package:awesome_notifications/src/models/received_models/received_action.dart';
 import 'package:awesome_notifications/src/models/received_models/received_notification.dart';
 import 'package:awesome_notifications/src/utils/assert_utils.dart';
 import 'package:awesome_notifications/src/utils/bitmap_utils.dart';
 import 'package:awesome_notifications/src/utils/date_utils.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 import 'enumerators/notification_permission.dart';
 import 'models/notification_channel_group.dart';
@@ -461,14 +460,14 @@ class AwesomeNotifications {
     await _channel.invokeMethod(CHANNEL_METHOD_SET_BADGE_COUNT, amount);
   }
 
-  /// Decrement the badge counter
+  /// Increment the badge counter
   Future<int> incrementGlobalBadgeCounter() async {
     final int badgeCount =
         await _channel.invokeMethod(CHANNEL_METHOD_INCREMENT_BADGE_COUNT);
     return badgeCount;
   }
 
-  /// Increment the badge counter
+  /// Decrement the badge counter
   Future<int> decrementGlobalBadgeCounter() async {
     final int badgeCount =
         await _channel.invokeMethod(CHANNEL_METHOD_DECREMENT_BADGE_COUNT);
